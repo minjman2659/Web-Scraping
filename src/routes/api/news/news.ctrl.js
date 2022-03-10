@@ -3,7 +3,7 @@ const Joi = require("joi");
 const {
   keywordCrawler,
   urlCrawler,
-  createNewsPDF,
+  createNewsImages,
   validateSchema,
 } = require("lib");
 
@@ -31,17 +31,18 @@ exports.getNewsList = async (req, res, next) => {
   }
 };
 
-exports.postNewsPDF = async (req, res, next) => {
+exports.postNewsImages = async (req, res, next) => {
   const schema = Joi.object().keys({
-    newsUrl: Joi.string().required(),
+    url: Joi.string().required(),
   });
   if (!validateSchema(res, schema, req.body)) return;
 
-  const { newsUrl } = req.body;
+  const { url } = req.body;
 
   try {
-    const news = await urlCrawler(newsUrl);
-    await createNewsPDF(newsUrl, news.title);
+    const news = await urlCrawler(url);
+    await createNewsImages(url, news.title);
+
     res.send(news);
   } catch (err) {
     next(err);

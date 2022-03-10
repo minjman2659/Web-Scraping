@@ -4,7 +4,7 @@ const validateSchema = require("./validate-schema");
 const imagesDir = require("./images-dir");
 const getToday = require("./get-today");
 const getHtml = require("./get-html");
-const createNewsPDF = require("./create-newsPDF");
+const createNewsImages = require("./create-news-images");
 
 module.exports = {
   keywordCrawler,
@@ -13,5 +13,5 @@ module.exports = {
   imagesDir,
   getToday,
   getHtml,
-  createNewsPDF,
+  createNewsImages,
 };
