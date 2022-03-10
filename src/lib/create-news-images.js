@@ -19,9 +19,8 @@ const createNewsImages = async (url, title) => {
     await Promise.all([
       await page.screenshot({ path: pngPath, fullPage: true }),
       await page.pdf({ path: pdfPath, format: "a4" }),
-    ])
-      .then(() => browser.close())
-      .catch((err) => console.log(err));
+    ]);
+    await browser.close();
   } catch (err) {
     throw new Error(err);
   }
