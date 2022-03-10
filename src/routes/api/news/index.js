@@ -1,9 +1,10 @@
-const express = require('express');
+const express = require("express");
 
 const news = express.Router();
 
-const { getNewsList } = require('./news.ctrl');
+const { getNewsList, postNewsPDF } = require("./news.ctrl");
 
-news.get('/', getNewsList);
+news.get("/", getNewsList);
+news.post("/", postNewsPDF);
 
 module.exports = news;
