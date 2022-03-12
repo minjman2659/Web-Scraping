@@ -1,11 +1,11 @@
-const Joi = require("joi");
+const Joi = require('joi');
 
 const {
-  keywordCrawler,
-  urlCrawler,
+  keywordScraper,
+  urlScraper,
   createNewsImages,
   validateSchema,
-} = require("lib");
+} = require('lib');
 
 exports.getNewsList = async (req, res, next) => {
   const schema = Joi.object().keys({
@@ -23,7 +23,7 @@ exports.getNewsList = async (req, res, next) => {
 
   let newsList = null;
   try {
-    newsList = await keywordCrawler(keyword, start);
+    newsList = await keywordScraper(keyword, start);
 
     res.send(newsList);
   } catch (err) {
@@ -40,7 +40,7 @@ exports.postNewsImages = async (req, res, next) => {
   const { url } = req.body;
 
   try {
-    const news = await urlCrawler(url);
+    const news = await urlScraper(url);
     await createNewsImages(url, news.title);
 
     res.send(news);
