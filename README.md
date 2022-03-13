@@ -1,5 +1,5 @@
 # Web-Scraping
-Web-scraping by Nodejs (Base _ Naver news)
+Web-scraping by Nodejs (Based _ Naver news)
 
 참고) https://www.scrapingbee.com/blog/web-scraping-javascript
 
