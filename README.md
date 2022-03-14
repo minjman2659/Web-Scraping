@@ -26,9 +26,9 @@ Node 16 혹은 그 이상의 버전을 필요로 합니다.
 
 1. 키워드에 해당되는 뉴스 리스트만을 뽑아 원하는 데이터 스크래핑하기
 
-![scraping1](https://media.discordapp.net/attachments/885202056355397686/952071051892908092/scraping.gif?width=1102&height=549)
+![scraping1](https://media.discordapp.net/attachments/885202056355397686/952878608408543252/scraping1.gif?width=1102&height=549)
 
 
 2. 특정 뉴스 url 스크래핑 & 스크린샷 캡처 후 pdf, png 파일 만들기
 
-![scraping2](https://media.discordapp.net/attachments/885202056355397686/952071052471730196/scraping2.gif?width=1102&height=549)
+![scraping2](https://media.discordapp.net/attachments/885202056355397686/952878608937013288/ezgif.com-gif-maker.gif?width=1102&height=549)
