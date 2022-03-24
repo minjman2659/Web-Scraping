@@ -1,8 +1,4 @@
-const dotenv = require("dotenv");
-const path = require("path");
-const app = require("app");
-
-dotenv.config({ path: path.join(process.cwd(), ".env") });
+const app = require('app');
 
 const PORT = 8080;
 

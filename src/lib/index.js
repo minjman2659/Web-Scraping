@@ -5,6 +5,7 @@ const imagesDir = require('./images-dir');
 const getToday = require('./get-today');
 const getHtml = require('./get-html');
 const createNewsImages = require('./create-news-images');
+const getNewsFromOpenAPI = require('./get-news-from-openAPI');
 
 module.exports = {
   keywordScraper,
@@ -14,4 +15,5 @@ module.exports = {
   getToday,
   getHtml,
   createNewsImages,
+  getNewsFromOpenAPI,
 };

@@ -1,34 +1,48 @@
-const Joi = require("joi");
+const Joi = require('joi');
 
 const {
   keywordScraper,
   urlScraper,
   createNewsImages,
   validateSchema,
-} = require("lib");
-
-const { CLIENT_ID, CLIENT_SECRET } = process.env;
-
-if (!CLIENT_ID || !CLIENT_SECRET) {
-  throw new Error("NO_ENV");
-}
+  getNewsFromOpenAPI,
+} = require('lib');
 
 exports.getNewsByOpenAPI = async (req, res, next) => {
   const schema = Joi.object().keys({
-    query: Joi.string().min(1).required(), // 검색어
-    display: Joi.number().integer().min(10).max(100).optional(), // 출력 개수
-    start: Joi.number().integer().min(1).max(1000).optional(), // 검색 시작 위치
-    sort: Joi.string().valid("sim", "date").optional(), // sim: 유사도순 , date: 날짜순
+    query: Joi.string().min(1).required(), // 검색어 (required)
+    display: Joi.number().integer().min(10).max(100).optional(), // 출력 개수 (default: 10)
+    start: Joi.number().integer().min(1).max(1000).optional(), // 검색 시작 위치 (default: 1)
+    sort: Joi.string().valid('sim', 'date').optional(), // sim: 유사도순 , date: 날짜순 (default: date)
   });
 
   if (!validateSchema(res, schema, req.query)) return;
 
   const { query, display, start, sort } = req.query;
 
-  res.send("Hello");
+  let queryUrl = `query=${encodeURI(query)}`;
+  if (display) {
+    queryUrl += `&display=${display}`;
+  }
+  if (start) {
+    queryUrl += `&start=${start}`;
+  }
+  if (sort) {
+    queryUrl += `&sort=${encodeURI(sort)}`;
+  }
+
+  let news = null;
+  try {
+    news = await getNewsFromOpenAPI(queryUrl);
+  } catch (err) {
+    next(err);
+    return;
+  }
+
+  res.send(news);
 };
 
-exports.getNewsList = async (req, res, next) => {
+exports.getScrapNewsList = async (req, res, next) => {
   const schema = Joi.object().keys({
     keyword: Joi.string().min(1).required(),
     start: Joi.number().integer().min(1).allow(null).optional(),
@@ -52,7 +66,7 @@ exports.getNewsList = async (req, res, next) => {
   }
 };
 
-exports.postNewsImages = async (req, res, next) => {
+exports.postScrapNewsImages = async (req, res, next) => {
   const schema = Joi.object().keys({
     url: Joi.string().required(),
   });
