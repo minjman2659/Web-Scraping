@@ -2,9 +2,15 @@ const express = require("express");
 
 const news = express.Router();
 
-const { getNewsList, postNewsImages } = require("./news.ctrl");
+const {
+  getNewsList,
+  postNewsImages,
+  getNewsByOpenAPI,
+} = require("./news.ctrl");
 
-news.get("/", getNewsList);
+news.get("/scrap", getNewsList);
+news.get("/", getNewsByOpenAPI);
+
 news.post("/", postNewsImages);
 
 module.exports = news;
